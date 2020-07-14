@@ -88,6 +88,7 @@ rtl_433_SOURCES      = abuf.c \
                        devices/honeywell_wdb.c \
                        devices/ht680.c \
                        devices/ibis_beacon.c \
+                       devices/idm.c \
                        devices/ikea_sparsnas.c \
                        devices/infactory.c \
                        devices/inovalley-kw9015b.c \
@@ -141,6 +142,7 @@ rtl_433_SOURCES      = abuf.c \
                        devices/tfa_twin_plus_30.3049.c \
                        devices/thermopro_tp11.c \
                        devices/thermopro_tp12.c \
+                       devices/tpms_abarth124.c \
                        devices/tpms_citroen.c \
                        devices/tpms_elantra2012.c \
                        devices/tpms_ford.c \

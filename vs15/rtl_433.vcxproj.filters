@@ -373,6 +373,9 @@
     <ClCompile Include="..\src\devices\ibis_beacon.c">
       <Filter>Source Files\devices</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\devices\idm.c">
+      <Filter>Source Files\devices</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\devices\ikea_sparsnas.c">
       <Filter>Source Files\devices</Filter>
     </ClCompile>
@@ -530,6 +533,9 @@
       <Filter>Source Files\devices</Filter>
     </ClCompile>
     <ClCompile Include="..\src\devices\thermopro_tp12.c">
+      <Filter>Source Files\devices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\devices\tpms_abarth124.c">
       <Filter>Source Files\devices</Filter>
     </ClCompile>
     <ClCompile Include="..\src\devices\tpms_citroen.c">
