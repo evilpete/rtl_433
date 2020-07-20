@@ -92,6 +92,7 @@ rtl_433_SOURCES      = abuf.c \
                        devices/ikea_sparsnas.c \
                        devices/infactory.c \
                        devices/inovalley-kw9015b.c \
+                       devices/insteon.c \
                        devices/interlogix.c \
                        devices/intertechno.c \
                        devices/kedsum.c \
@@ -107,6 +108,7 @@ rtl_433_SOURCES      = abuf.c \
                        devices/maverick_et73.c \
                        devices/maverick_et73x.c \
                        devices/mebus.c \
+                       devices/missil_ml0757.c \
                        devices/new_template.c \
                        devices/newkaku.c \
                        devices/nexa.c \
@@ -130,6 +132,7 @@ rtl_433_SOURCES      = abuf.c \
                        devices/s3318p.c \
                        devices/schraeder.c \
                        devices/scmplus.c \
+                       devices/sharp_spc775.c \
                        devices/silvercrest.c \
                        devices/simplisafe.c \
                        devices/smoke_gs558.c \
