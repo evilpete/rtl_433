@@ -1,3 +1,11 @@
+/** @file
+    Springfield PreciseTemp Wireless Temperature and Soil Moisture Station.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+*/
 /**
 Springfield PreciseTemp Wireless Temperature and Soil Moisture Station.
 
@@ -29,7 +37,8 @@ static int springfield_decode(r_device *decoder, bitbuffer_t *bitbuffer)
     uint8_t *b;
     int sid, battery, button, channel, temp;
     float temp_c;
-    int moisture, uk1;
+    int moisture;
+    // int uk1;
     data_t *data;
     unsigned tmpData;
     unsigned savData = 0;
@@ -57,7 +66,7 @@ static int springfield_decode(r_device *decoder, bitbuffer_t *bitbuffer)
         temp     = (int16_t)(((b[1] & 0x0f) << 12) | (b[2] << 4)); // sign extend
         temp_c   = (temp >> 4) * 0.1f;
         moisture = b[3] >> 4;
-        uk1      = b[4] >> 4; /* unknown. */
+        //uk1      = b[4] >> 4; /* unknown. */
 
         /* clang-format off */
         data = data_make(
@@ -90,6 +99,7 @@ static char *output_fields[] = {
         "temperature_C",
         "moisture",
         "button",
+        "mic",
         NULL,
 };
 

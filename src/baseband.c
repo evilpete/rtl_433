@@ -16,6 +16,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "r_util.h"
+
 static uint16_t scaled_squares[256];
 
 /// precalculate lookup table for envelope detection.
@@ -125,7 +127,7 @@ void baseband_low_pass_filter(uint16_t const *x_buf, int16_t *y_buf, uint32_t le
     static int const b[FILTER_ORDER + 1] = {FIX(0.07296), FIX(0.07296)};
 
     unsigned long i;
-    // Fixme: Will Segmentation Fault if len < FILTERORDER
+    // TODO: Will Segmentation Fault if len < FILTERORDER
 
     /* Calculate first sample */
     y_buf[0] = ((a[1] * state->y[0] >> 1) + (b[0] * x_buf[0] >> 1) + (b[1] * state->x[0] >> 1)) >> (F_SCALE - 1);
@@ -157,7 +159,7 @@ static int16_t atan2_int16(int32_t y, int32_t x)
     int32_t const abs_y = abs(y);
     int32_t angle;
 
-    if ((!x) && !y) return 0; // We get 8191 with the code below, FIXME
+    if (!x && !y) return 0; // We would get 8191 with the code below
 
     if (x >= 0) {    // Quadrant I and IV
         int32_t denom = (abs_y + x);
@@ -257,6 +259,7 @@ static int32_t atan2_int32(int32_t y, int32_t x)
 /// for evaluation.
 void baseband_demod_FM_cs16(int16_t const *x_buf, int16_t *y_buf, unsigned long num_samples, demodfm_state_t *state, unsigned fpdm)
 {
+    UNUSED(fpdm);
     ///  [b,a] = butter(1, 0.1) -> 3x tau (95%) ~10 samples
     //static int const alp[2] = {FIX32(1.00000), FIX32(0.72654)};
     //static int const blp[2] = {FIX32(0.13673), FIX32(0.13673)};

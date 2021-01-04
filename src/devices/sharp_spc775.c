@@ -1,5 +1,5 @@
 /** @file
-    Decoder for Sharp SPC775 weather station
+    Decoder for Sharp SPC775 weather station.
 
     Copyright (C) 2020 Daniel Drown
 
@@ -9,7 +9,7 @@
     (at your option) any later version.
 */
 /**
-Sharp SPC775 weather station
+Decoder for Sharp SPC775 weather station.
 
 - Modulation: FSK PWM
 - Frequency: 917.2 MHz
@@ -106,8 +106,10 @@ static int sharp_spc775_decode(r_device *decoder, bitbuffer_t *bitbuffer)
 static char *output_fields[] = {
         "model",
         "id",
+        "battery_ok",
         "temperature_C",
         "humidity",
+        "mic",
         NULL,
 };
 

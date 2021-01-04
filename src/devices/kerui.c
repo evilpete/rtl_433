@@ -29,7 +29,8 @@ Long: 860-1016 us, short: 304-560 us, older sync: 480 us, newer sync: 340 us,
 
 #include "decoder.h"
 
-static int kerui_callback(r_device *decoder, bitbuffer_t *bitbuffer) {
+static int kerui_callback(r_device *decoder, bitbuffer_t *bitbuffer)
+{
     data_t *data;
     uint8_t *b;
     int id;
@@ -45,6 +46,14 @@ static int kerui_callback(r_device *decoder, bitbuffer_t *bitbuffer) {
     if (bitbuffer->bits_per_row[r] != 25)
         return DECODE_ABORT_LENGTH;
     b = bitbuffer->bb[r];
+
+    // No need to decode/extract values for simple test
+    if ( !b[0] && !b[1] && !b[2] ) {
+        if (decoder->verbose > 1) {
+            fprintf(stderr, "%s: DECODE_FAIL_SANITY data all 0x00\n", __func__);
+        }
+        return DECODE_FAIL_SANITY;
+    }
 
     //invert bits, short pulse is 0, long pulse is 1
     b[0] = ~b[0];

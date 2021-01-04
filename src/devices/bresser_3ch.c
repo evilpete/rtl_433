@@ -1,34 +1,47 @@
-/* Bresser sensor protocol
- *
- * The protocol is for the wireless Temperature/Humidity sensor
- * Bresser Thermo-/Hygro-Sensor 3CH
- * also works for Renkforce DM-7511
- *
- * The sensor sends 15 identical packages of 40 bits each ~60s.
- * The bits are PWM modulated with On Off Keying.
- *
- * A short pulse of 250 us followed by a 500 us gap is a 0 bit,
- * a long pulse of 500 us followed by a 250 us gap is a 1 bit,
- * there is a sync preamble of pulse, gap, 750 us each, repeated 4 times.
- * Actual received and demodulated timings might be 2% shorter.
- *
- * The data is grouped in 5 bytes / 10 nibbles
- * [id] [id] [flags] [temp] [temp] [temp] [humi] [humi] [chk] [chk]
- *
- * id is an 8 bit random id that is generated when the sensor starts
- * flags are 4 bits battery low indicator, test button press and channel
- * temp is 12 bit unsigned fahrenheit offset by 90 and scaled by 10
- * humi is 8 bit relative humidity percentage
- *
- * Copyright (C) 2015 Christian W. Zuckschwerdt <zany@triq.net>
- */
+/** @file
+    Bresser sensor protocol.
+
+    Copyright (C) 2015 Christian W. Zuckschwerdt <zany@triq.net>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+*/
+
+/**
+Bresser sensor protocol.
+
+The protocol is for the wireless Temperature/Humidity sensor
+Bresser Thermo-/Hygro-Sensor 3CH
+also works for Renkforce DM-7511
+
+The sensor sends 15 identical packages of 40 bits each ~60s.
+The bits are PWM modulated with On Off Keying.
+
+A short pulse of 250 us followed by a 500 us gap is a 0 bit,
+a long pulse of 500 us followed by a 250 us gap is a 1 bit,
+there is a sync preamble of pulse, gap, 750 us each, repeated 4 times.
+Actual received and demodulated timings might be 2% shorter.
+
+The data is grouped in 5 bytes / 10 nibbles
+[id] [id] [flags] [temp] [temp] [temp] [humi] [humi] [chk] [chk]
+
+id is an 8 bit random id that is generated when the sensor starts
+flags are 4 bits battery low indicator, test button press and channel
+temp is 12 bit unsigned fahrenheit offset by 90 and scaled by 10
+humi is 8 bit relative humidity percentage
+
+*/
 #include "decoder.h"
 
-static int bresser_3ch_callback(r_device *decoder, bitbuffer_t *bitbuffer) {
+static int bresser_3ch_callback(r_device *decoder, bitbuffer_t *bitbuffer)
+{
     data_t *data;
     uint8_t *b;
 
-    int id, status, battery_low, test, channel, temp_raw, humidity;
+    int id, battery_low, channel, temp_raw, humidity;
+    // int status, test;
     float temp_f;
 
     int r = bitbuffer_find_repeated_row(bitbuffer, 3, 40);
@@ -51,9 +64,9 @@ static int bresser_3ch_callback(r_device *decoder, bitbuffer_t *bitbuffer) {
     }
 
     id = b[0];
-    status = b[1];
+    //status = b[1];
     battery_low = (b[1] & 0x80) >> 7;
-    test = (b[1] & 0x40) >> 6;
+    //test = (b[1] & 0x40) >> 6;
     channel = (b[1] & 0x30) >> 4;
 
     temp_raw = ((b[1] & 0x0F) << 8) + b[2];

@@ -1,21 +1,22 @@
-/*
- * Brennenstuhl RCS 2044 remote control on 433.92MHz
- * likely x1527
- *
- * Copyright (C) 2015 Paul Ortyl
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
- */
+/** @file
+    Brennenstuhl RCS 2044 remote control on 433.92MHz likely x1527.
+
+    Copyright (C) 2015 Paul Ortyl
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License version 3 as
+    published by the Free Software Foundation.
+*/
 
 /*
- * Receiver for the "RCS 2044 N Comfort Wireless Controller Set" sold under
- * the "Brennenstuhl" brand.
- *
- * The protocol is also implemented for raspi controlled transmitter on 433.92 MHz:
- * https://github.com/xkonni/raspberry-remote
- */
+Brennenstuhl RCS 2044 remote control on 433.92MHz likely x1527.
+
+Receiver for the "RCS 2044 N Comfort Wireless Controller Set" sold under
+the "Brennenstuhl" brand.
+
+The protocol is also implemented for raspi controlled transmitter on 433.92 MHz:
+https://github.com/xkonni/raspberry-remote
+*/
 
 #include "decoder.h"
 
@@ -108,9 +109,10 @@ static int brennenstuhl_rcs_2044_callback(r_device *decoder, bitbuffer_t *bitbuf
 
 static char *output_fields[] = {
     "model",
-    "type",
+    "id",
+    "key",
     "state",
-    NULL
+    NULL,
 };
 
 r_device brennenstuhl_rcs_2044 = {
